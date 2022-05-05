@@ -1,0 +1,108 @@
+{
+	"name": "render-crlf",
+	"displayName": "Render Line Endings",
+	"description": "Displays the line ending symbol and optionally extra whitespace when 'Render whitespace' is turned on.",
+	"icon": "ICON.png",
+	"version": "1.6.0",
+	"publisher": "medo64",
+	"galleryBanner": {
+		"color": "#373E6D",
+		"theme": "dark"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/medo64/render-crlf/issues/",
+		"email": "jmedved@jmedved.com"
+	},
+	"homepage": "https://medo64.com/render-crlf/",
+	"repository": {
+		"url": "https://github.com/medo64/render-crlf/"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"crlf",
+		"end-of-line",
+		"eol",
+		"lf",
+		"line ending"
+	],
+	"engines": {
+		"vscode": "^1.31.0"
+	},
+	"main": "./out/extension",
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"contributes": {
+		"configuration": [
+			{
+				"type": "object",
+				"title": "Render CRLF Line Endings",
+				"properties": {
+					"code-eol.newlineCharacter": {
+						"scope": "language-overridable",
+						"description": "Character used to display LF (line-feed) line ending (aka Linux/Mac line ending).",
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 1,
+						"default": "↓"
+					},
+					"code-eol.returnCharacter": {
+						"scope": "language-overridable",
+						"description": "Character used to display CR (carriage-return) line ending (aka old Macintosh line ending).",
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 1,
+						"default": "←"
+					},
+					"code-eol.crlfCharacter": {
+						"scope": "language-overridable",
+						"description": "Character used to display CRLF (carriage-return, line-feed) line ending (aka Windows line ending).",
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 2,
+						"default": "↵"
+					},
+					"code-eol.highlightNonDefault": {
+						"scope": "language-overridable",
+						"type": "boolean",
+						"default": false,
+						"description": "If set, non-default line endings will be hightlighted as errors."
+					},
+					"code-eol.highlightExtraWhitespace": {
+						"scope": "language-overridable",
+						"type": "boolean",
+						"default": false,
+						"description": "If set, extra whitespace at line ending will be hightlighted as errors."
+					},
+					"code-eol.decorateBeforeEol": {
+						"scope": "language-overridable",
+						"type": "boolean",
+						"default": false,
+						"description": "If true, decoration will come before end of the line thus playing better with extensions that use decorations after end of the line. Do note that line ending will not be rendered on empty lines if this is used."
+					},
+					"code-eol.forceShowOnWordWrap": {
+						"scope": "language-overridable",
+						"type": "boolean",
+						"default": false,
+						"description": "If true, decoration will be shown when word-wrap is not off (regardless of the other settings)."
+					}
+				}
+			}
+		]
+	},
+	"scripts": {},
+	"devDependencies": {
+		"eslint": "^8.7.0",
+		"vsce": "^2.6.7",
+		"vscode-test": "^1.6.1"
+	},
+	"__metadata": {
+		"id": "a5d8b25c-27b8-421d-a8b0-1681827909b9",
+		"publisherId": "c6d3d238-ab9e-46ec-92d8-4a84a76e905d",
+		"publisherDisplayName": "Josip Medved",
+		"installedTimestamp": 1649522240736
+	}
+}

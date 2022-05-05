@@ -1,0 +1,50 @@
+{
+
+
+  "git.autofetch"                       : true,
+  "git.suggestSmartCommit"              : false,
+  "git.ignoreWindowsGit27Warning"       : true,
+
+  "workbench.iconTheme"                 : "vscode-icons",
+
+  "editor.fontSize"                     : 12,
+  "editor.occurrencesHighlight"         : false,
+  "editor.semanticHighlighting.enabled" : false,
+  "editor.comments.ignoreEmptyLines"    : false,
+  "editor.comments.insertSpace"         : true,
+  "editor.codeLensFontFamily"           : "Fira Code’, Consolas, ‘Courier New’, monospace.",
+
+  "diffEditor.ignoreTrimWhitespace"     : false,
+  "diffEditor.renderSideBySide"         : false,
+
+  "markdown.showToolbar"                : true,
+  "markdown.addFrontMatterTitle"        : false,
+
+  "codesnap.showWindowTitle"            : true,
+  "codesnap.transparentBackground"      : true,
+  "codesnap.backgroundColor"            : "#789c9a",
+  "codesnap.containerPadding"           : "5em",
+
+  "workbench.colorTheme"                : "One Dark Pro",
+
+  "godot_tools.editor_path"             : "*INSERT_GODOT_EXE_PATH*",
+  "editor.renderWhitespace"             : "all",
+  "editor.renderControlCharacters"      : true,
+
+
+
+
+  "VSCodeCounter.languages": {
+
+    "LinkedEntityComposition": {
+      "aliases": ["LEC","lec"],
+      "extensions": [".lec"],
+      "lineComments": ["//"],
+      "blockComments": [],
+      "blockStrings": [],
+      "filenames": []
+    },
+  },
+
+
+}

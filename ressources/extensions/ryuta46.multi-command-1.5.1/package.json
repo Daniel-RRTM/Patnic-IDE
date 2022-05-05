@@ -1,0 +1,91 @@
+{
+	"name": "multi-command",
+	"displayName": "multi-command",
+	"description": "Invoke multiple commands as one command.",
+	"version": "1.5.1",
+	"publisher": "ryuta46",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ryuta46/vscode-multi-command.git"
+	},
+	"engines": {
+		"vscode": "^1.10.0"
+	},
+	"extensionKind": [
+		"ui",
+		"workspace"
+	],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.multiCommand.execute",
+				"title": "Execute multi command",
+				"category": "Multi command"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "multi-command",
+			"properties": {
+				"multiCommand.commands": {
+					"type": [
+						"array",
+						"object"
+					],
+					"items": {
+						"type": "object",
+						"title": "command sequence",
+						"properties": {
+							"command": {
+								"type": "string",
+								"description": "command name of this command sequence"
+							},
+							"interval": {
+								"type": "number",
+								"description": "time interval(milliseconds) between each command execution."
+							},
+							"sequence": {
+								"type": "array",
+								"items": {
+									"type": [
+										"string",
+										"object"
+									],
+									"description": "command sequence which been invoked"
+								}
+							}
+						}
+					},
+					"description": "command sequence list."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.9.7",
+		"vscode": "^1.0.0",
+		"mocha": "^2.3.3",
+		"@types/node": "^7.0.7",
+		"@types/mocha": "^2.2.32"
+	},
+	"__metadata": {
+		"id": "a92437f6-75af-47b2-b3e0-99764308b4be",
+		"publisherId": "2250aff9-ac3c-48a2-be21-13c590d79a5d",
+		"publisherDisplayName": "ryuta46",
+		"installedTimestamp": 1626266552725
+	}
+}

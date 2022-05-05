@@ -1,0 +1,139 @@
+// Place your key bindings in this file to override the defaults
+[
+
+
+
+
+  //--------------------\\
+  // ---- ZEN-MODE ---- \\
+  //--------------------\\
+
+  // F6 toggles ZenMode when not active and switches to FileExplorer
+  {"key":     "f6",
+    "command": "extension.multiCommand.execute",
+    "args": {  "sequence": [
+              "workbench.action.toggleZenMode",
+              "workbench.files.action.showActiveFileInExplorer",]
+    },"when":    "!inZenMode"},
+
+  // opens to Fileexplorer when in ZenMode
+  {"key":     "f6",
+    "command": "workbench.files.action.showActiveFileInExplorer",
+    "when":    "!explorerViewletVisible && inZenMode"},
+
+  // opens to Fileexplorer when in ZenMode
+  {"key":     "esc",
+    "command": "workbench.action.exitZenMode",
+    "when":    "inZenMode"},
+
+
+
+
+
+
+
+  //----------------------\\
+  // ---- NAVIGATION ---- \\
+  //----------------------\\
+
+  // F1 toggles search selected in all Files of Project
+  {"key":     "f1",
+  "command": "workbench.view.search",
+  "when":    "editorTextFocus"},
+
+  // NUMPAD 0 shows anchors
+  {"key":"numpad0",
+    "command": "epicAnchors.focus",
+    "when": ""},
+
+
+
+  
+  
+  // --- NUMPAD PAIRS ---
+  
+  //switch to left file
+  {"key": "numpad9",
+  "command": "workbench.action.nextEditor"},
+  //switch to right file
+  {"key": "numpad7",
+  "command": "workbench.action.previousEditor"},
+
+
+
+  //switch to left panel
+  {"key":     "numpad1",
+    "command": "workbench.action.moveEditorToPreviousGroup"},
+  //switch to left panel
+  {"key":     "numpad3",
+  "command": "workbench.action.moveEditorToNextGroup"},
+
+
+
+  //switch to left panel
+  {"key":     "numpad4",
+    "command": "workbench.action.focusLeftGroup",
+    "when":    ""},
+  //switch to right panel
+  {"key":     "numpad6",
+    "command": "workbench.action.focusRightGroup",
+    "when":    ""},
+
+
+
+
+    
+    
+    //{ // Unbind unconditional default
+    //"key": "numpad5",
+  //  "when": "editorFocus",
+   // "command": "-workbench.action.focusSideBar"
+ // },
+
+  { // |←1
+    "key": "numpad5",
+    "when": "editorFocus",
+    "command": "workbench.action.focusSideBar"
+  },
+  { // |←1
+    "key": "numpad5",
+    "when": "!sideBarFocus",
+    "command": "workbench.action.focusLastEditorGroup"
+  },
+  {
+    "key": "shift+f3",
+    "command": "editor.action.nextMatchFindAction",
+    "when": "editorFocus"
+  },
+  {
+    "key": "f3",
+    "command": "-editor.action.nextMatchFindAction",
+    "when": "editorFocus"
+  },
+  {
+    "key": "f2",
+    "command": "editor.action.rename",
+    "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "f2",
+    "command": "-editor.action.rename",
+    "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+  },
+        
+        
+
+
+//      {"key":     "numpad_add",
+//         "command": "workbench.files.action.showActiveFileInExplorer"},
+  
+
+//  { // |→2
+//    "key": "numpad2",
+//    "when": "sideBarFocus",
+//    "command": "workbench.action.focusActiveEditorGroup"
+// },
+  
+
+
+]

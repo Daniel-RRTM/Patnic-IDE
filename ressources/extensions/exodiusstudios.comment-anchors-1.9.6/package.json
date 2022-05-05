@@ -1,0 +1,441 @@
+{
+	"name": "comment-anchors",
+	"displayName": "Comment Anchors",
+	"description": "Place anchor tags within comments for easy file & workspace navigation.",
+	"version": "1.9.6",
+	"publisher": "ExodiusStudios",
+	"engines": {
+		"vscode": "^1.38.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"icon": "media/icon.png",
+	"galleryBanner": {
+		"color": "#0c5b82",
+		"theme": "dark"
+	},
+	"homepage": "https://github.com/ExodiusStudios/vscode-comment-anchors/blob/master/README.md",
+	"repository": {
+		"url": "https://github.com/ExodiusStudios/vscode-comment-anchors",
+		"type": "git"
+	},
+	"contributes": {
+		"commands": [
+			{
+				"command": "commentAnchors.parse",
+				"title": "Parse the current file and look for anchors",
+				"category": "Comment Anchors"
+			},
+			{
+				"command": "commentAnchors.toggle",
+				"title": "Toggle the visibility of comment anchors",
+				"category": "Comment Anchors"
+			},
+			{
+				"command": "commentAnchors.listTags",
+				"title": "List configured anchor tags",
+				"category": "Comment Anchors"
+			},
+			{
+				"command": "commentAnchors.openFileAndRevealLine",
+				"title": "Open a file and reveal a line"
+			},
+			{
+				"command": "commentAnchors.launchWorkspaceScan",
+				"title": "Initiate a workspace scan"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "comment-anchors",
+					"title": "Comment Anchors",
+					"icon": "res/icon.svg"
+				}
+			]
+		},
+		"views": {
+			"comment-anchors": [
+				{
+					"id": "fileAnchors",
+					"name": "File Anchors"
+				},
+				{
+					"id": "workspaceAnchors",
+					"name": "Workspace Anchors"
+				},
+				{
+					"id": "epicAnchors",
+					"name": "Epic Anchors",
+					"visibility": "collapsed"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "commentAnchors.parse",
+					"when": "view == fileAnchors",
+					"group": "operations"
+				},
+				{
+					"command": "commentAnchors.listTags",
+					"when": "view == fileAnchors",
+					"group": "operations"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "Comment Anchors",
+			"properties": {
+				"commentAnchors.tagHighlights.enabled": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to highlight the anchor tags",
+					"scope": "window"
+				},
+				"commentAnchors.parseDelay": {
+					"type": "number",
+					"default": 500,
+					"description": "The delay between stopping with typing and anchors being reloaded. When you experience hangs or freezes, it is recommended to increase this value",
+					"scope": "window"
+				},
+				"commentAnchors.scrollPosition": {
+					"type": "string",
+					"default": "top",
+					"enum": [
+						"top",
+						"center",
+						"bottom"
+					],
+					"description": "Where to position the anchor when scrolled to",
+					"scope": "window"
+				},
+				"commentAnchors.showCursor": {
+					"type": "boolean",
+					"default": false,
+					"description": "Display the current cursor position as entry in the file anchor list",
+					"scope": "window"
+				},
+				"commentAnchors.workspace.enabled": {
+					"type": "boolean",
+					"default": true,
+					"description": "Scan the entire workspace instead of just the currently opened file",
+					"scope": "window"
+				},
+				"commentAnchors.workspace.lazyLoad": {
+					"type": "boolean",
+					"default": true,
+					"description": "Require a manual trigger to start the workspace scan. Useful for when you want to reduce load time. (Default true)",
+					"scope": "window"
+				},
+				"commentAnchors.workspace.maxFiles": {
+					"type": "integer",
+					"default": 250,
+					"description": "The maximum amount of files that will be parsed. Higher values may cause performance degration in large projects. (Default 250)",
+					"scope": "window"
+				},
+				"commentAnchors.workspace.matchFiles": {
+					"type": "string",
+					"default": "**/*",
+					"description": "The glob pattern of the files that will be parsed by Comment Anchors",
+					"scope": "window"
+				},
+				"commentAnchors.workspace.excludeFiles": {
+					"type": "string",
+					"default": "**/{node_modules,.git,.idea,target,out,build,dist,vendor}/**/*",
+					"description": "The glob pattern of the files that will be excluded from matching by Comment Anchors",
+					"scope": "window"
+				},
+				"commentAnchors.workspace.pathFormat": {
+					"type": "string",
+					"default": "full",
+					"description": "Alter how the workspace anchor tree displays path names",
+					"scope": "window",
+					"enum": [
+						"full",
+						"abbreviated",
+						"hidden"
+					]
+				},
+				"commentAnchors.epic.provideAutoCompletion": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether auto complete an epic",
+					"scope": "window"
+				},
+				"commentAnchors.epic.seqStep": {
+					"type": "integer",
+					"default": 1,
+					"description": "Only useful when autoComplete is enabled. This will be added to the max seq for each epic as shown in the autocomplete item",
+					"scope": "window"
+				},
+				"commentAnchors.tags.provideAutoCompletion": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to provide auto completion entries for anchors",
+					"scope": "window"
+				},
+				"commentAnchors.tags.displayInSidebar": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to display tag names in the sidebar",
+					"scope": "window"
+				},
+				"commentAnchors.tags.displayInGutter": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to display tag icons in the gutter",
+					"scope": "window"
+				},
+				"commentAnchors.tags.displayInRuler": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to highlight tags in the scrollbar ruler",
+					"scope": "window"
+				},
+				"commentAnchors.tags.rulerStyle": {
+					"type": "string",
+					"enum": [
+						"center",
+						"left",
+						"right",
+						"full"
+					],
+					"default": "left",
+					"description": "The display style of tags in the ruler lane (Requires displayInRuler)",
+					"scope": "window"
+				},
+				"commentAnchors.tags.displayLineNumber": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to display line numbers in the sidebar",
+					"scope": "window"
+				},
+				"commentAnchors.tags.sortMethod": {
+					"type": "string",
+					"default": "line",
+					"enum": [
+						"type",
+						"line"
+					],
+					"description": "The method used to sort the anchors in the sidebar",
+					"scope": "window"
+				},
+				"commentAnchors.tags.matchCase": {
+					"type": "boolean",
+					"default": true,
+					"description": "When true, performs case sensitive matches on tags",
+					"scope": "window"
+				},
+				"commentAnchors.tags.displayHierarchyInWorkspace": {
+					"type": "boolean",
+					"default": true,
+					"description": "When true, displays hierarchical anchors in the workspace list",
+					"scope": "window"
+				},
+				"commentAnchors.tags.expandSections": {
+					"type": "boolean",
+					"default": true,
+					"description": "When true, sections are automatically expanded in the tree",
+					"scope": "window"
+				},
+				"commentAnchors.tags.separators": {
+					"type": "array",
+					"default": [
+						" - ",
+						": ",
+						" "
+					],
+					"items": {
+						"type": "string"
+					},
+					"description": "List of separators that can be placed between tags and comments",
+					"scope": "window"
+				},
+				"commentAnchors.tags.endTag": {
+					"type": "string",
+					"default": "!",
+					"description": "Specify a custom region end tag",
+					"scope": "window"
+				},
+				"commentAnchors.tags.list": {
+					"type": "array",
+					"default": [
+						{
+							"tag": "ANCHOR",
+							"iconColor": "default",
+							"highlightColor": "#A8C023",
+							"scope": "file"
+						},
+						{
+							"tag": "TODO",
+							"iconColor": "blue",
+							"highlightColor": "#3ea8ff",
+							"scope": "workspace"
+						},
+						{
+							"tag": "FIXME",
+							"iconColor": "red",
+							"highlightColor": "#F44336",
+							"scope": "workspace"
+						},
+						{
+							"tag": "STUB",
+							"iconColor": "purple",
+							"highlightColor": "#BA68C8",
+							"scope": "file"
+						},
+						{
+							"tag": "NOTE",
+							"iconColor": "orange",
+							"highlightColor": "#FFB300",
+							"scope": "file"
+						},
+						{
+							"tag": "REVIEW",
+							"iconColor": "green",
+							"highlightColor": "#64DD17",
+							"scope": "workspace"
+						},
+						{
+							"tag": "SECTION",
+							"iconColor": "blurple",
+							"highlightColor": "#896afc",
+							"scope": "workspace",
+							"behavior": "region"
+						},
+						{
+							"tag": "LINK",
+							"iconColor": "#2ecc71",
+							"highlightColor": "#2ecc71",
+							"scope": "workspace",
+							"behavior": "link"
+						}
+					],
+					"items": {
+						"type": "object",
+						"required": [
+							"tag",
+							"scope",
+							"highlightColor"
+						],
+						"properties": {
+							"tag": {
+								"type": "string",
+								"description": "The text to match for this tag"
+							},
+							"enabled": {
+								"type": "boolean",
+								"default": true,
+								"description": "Enable or disable this tag"
+							},
+							"iconColor": {
+								"type": "string",
+								"default": null,
+								"description": "The icon color as hex value. Set to null to default to highlightColor"
+							},
+							"highlightColor": {
+								"type": "string",
+								"description": "The foreground color applied to the anchor"
+							},
+							"backgroundColor": {
+								"type": "string",
+								"description": "The background color applied to the anchor"
+							},
+							"styleComment": {
+								"type": "boolean",
+								"description": "When true, highlights the comment as well"
+							},
+							"borderStyle": {
+								"type": "string",
+								"description": "The style applied to the border, see https://www.w3schools.com/cssref/pr_border.asp for more information"
+							},
+							"borderRadius": {
+								"type": "number",
+								"description": "The curvature radius of the applied border (Requires borderStyle to be set)",
+								"default": 0
+							},
+							"isBold": {
+								"type": "boolean",
+								"description": "Sets whether the tag is rendered in bold",
+								"default": true
+							},
+							"isItalic": {
+								"type": "boolean",
+								"description": "Sets whether the tag is rendered in italics",
+								"default": true
+							},
+							"scope": {
+								"type": "string",
+								"enum": [
+									"hidden",
+									"file",
+									"workspace"
+								],
+								"description": "Defines the scope of this tag. Setting this to \"file\" makes these tags only visible in the 'File Anchors' list, while \"hidden\" completely hides it from the anchor list",
+								"default": "workspace"
+							},
+							"behavior": {
+								"type": "string",
+								"enum": [
+									"anchor",
+									"region",
+									"link"
+								],
+								"description": "Specify the behavior type of this tag",
+								"default": "anchor"
+							}
+						}
+					},
+					"description": "List of additional custom Comment Anchor tags",
+					"scope": "window"
+				}
+			}
+		}
+	},
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension",
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"lint": "eslint . --ext .ts",
+		"lint:fix": "eslint  --fix . --ext .ts"
+	},
+	"devDependencies": {
+		"@types/debounce": "^1.0.0",
+		"@types/mocha": "^2.2.42",
+		"@types/node": "^7.0.43",
+		"@typescript-eslint/eslint-plugin": "^3.9.1",
+		"@typescript-eslint/parser": "^3.9.1",
+		"eslint": "^7.7.0",
+		"eslint-config-prettier": "^6.11.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"husky": "^4.2.5",
+		"prettier": "^2.0.5",
+		"typescript": "^4.0.3",
+		"vscode": "^1.1.37"
+	},
+	"dependencies": {
+		"debounce": "^1.2.0",
+		"escape-string-regexp": "^2.0.0",
+		"opn": "^6.0.0"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run lint:fix"
+		}
+	},
+	"__metadata": {
+		"id": "5cf10212-681f-48c7-b66f-bcce5dc44a64",
+		"publisherId": "9069d21e-e9c6-4063-8f3a-026d317bb8f4",
+		"publisherDisplayName": "Exodius Studios",
+		"installedTimestamp": 1627686990827
+	}
+}

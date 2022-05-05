@@ -1,0 +1,105 @@
+{
+
+
+ 	//---------------------------\\
+	//----- COMPONENT -----------\\
+	//---------------------------\\
+	"COMPONENT": {
+		"prefix"      : ["SN: Component"],
+		"description" : "Declare a new child of Component to describe a attribute of a Game-element\n",
+
+
+		"body": [
+		  "extends Component",
+		  "class_name C_${TM_FILENAME_BASE/[C]//g}_${1/(.*)/${1:/upcase}/g}",								// {use_file_name ; select_C ; insert_blank}   {input_field_1 : called_name} 
+		  "",
+		  "var value: ${2:static_typing_preffered}",														// {input_field_2 : called_static_typing_preffered}
+		  "",
+		  "func _init(valuePara:${2/(.*)/${1}/g}) -> void :",												// {use_input_field_2 ; select_all ; insert_all}
+		  "	self.name = \"C_${TM_FILENAME_BASE/[C]//g}_${1/(.*)/${1:/upcase}/g}\"",							// {use_file_name ; select_C ; insert_blank}   {use_input_field_1 ; select_all ; write_upper_case}
+		  "	value     = valuePara",
+		  "",                                        
+		  "",                                       
+		  " ",                                        
+		  "",
+		  "static func getType_quack() -> String : return \"${2/(.*)/${1:/upcase}/g}\"",					// {use_second_input ; select_all ; writer_upper_case} 
+		  "",
+		  "",
+		  "static func getAutoDoc() -> Dictionary : ",
+		  "	return{",
+		  "	\"suggestion\"  : \"${3:write_one_sentence_here}\",",											// {input_field_3 : called_write_one_sentence_here}
+		  "	\"description\" : \"${4:write_one_sentence_here}\",",											// {input_field_4 : called_write_one_sentence_here}
+		  "	\"validInputs\" : ${5:[],   # references of ENUM-class only!}",									// {input_field_5 : called_reference_Array_of_valid_inputs_if_available}
+		  "	\"validType\"   : getType_quack(),",
+		  "	\"nameToShow\"  : \"${0:write_max_two_words_here}\",",											// {input_field_5 : called_write_max_two_words_here}
+		  "}",
+		  "",
+		  ""
+		]
+		
+	  },
+
+
+
+ 	//---------------------------\\
+	//----- CLI -----------------\\
+	//---------------------------\\
+	"CLI_COMMAND": {
+			"prefix"      : ["SN: 009 CLI command"],
+			"description" : "Write a new Command for 009-CLI.\nacces it in Panic-mode by pressing F3 and running its function\n\n ----------------------------------------------------------\n|                        IMPORTANT!                        |\n| DONT FORGET, TO ENTER IT IN 009-CLI/Controler/Syntax.gd  |\n ----------------------------------------------------------\n",		
+			
+
+			"body": [
+			"extends Node",
+			"class_name _API_017_Cmd_${1:UsePascalCaseHere}",
+			"",
+			"",
+			"",
+			"static func run(parameter:Array) -> void:",
+			"	${0:	vvvvv write your logic here vvvvv}",
+			"",
+			"",
+			""
+			]
+	},
+
+		"CLI_SYNTAX": {
+			"prefix"      : ["SN: 009 CLI dict entry"],
+			"description" : "Add the neccessary Meta-data to the Command-dictionary to make it usable",
+
+
+			"body": [
+			"			\"${1:name_of_command}\" : {",
+			"				 \"passive\"   : ${2:boolean   # describes if it needs to be turned off again}",
+			"				,\"parameter\" : [${3:   # describes if it needs to be turned off again}]",
+			"				,\"toString\"  : ${4:String   # will be shown in overview}",
+			"				,\"class\"     : _API_017_Cmd_${5:ClassOfCommand   # Your class-name of the other snippet }",
+			"				,\"list\"      : [${0:Array(s)   # insert here references vor suggested Parameter}] ",
+			"				,\"input\"     : \"${1/(.*)/${1}/g}\"",
+			"			},"
+			]
+	  }
+
+
+
+ 	//---------------------------\\
+	//----- STAT_MOD ------------\\
+	//---------------------------\\
+
+
+
+ 	//---------------------------\\
+	//----- STAT_MOD ------------\\
+	//---------------------------\\
+
+
+
+ 	//---------------------------\\
+	//----- STAT_MOD ------------\\
+	//---------------------------\\
+
+
+
+
+
+}

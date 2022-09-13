@@ -94,7 +94,7 @@ echo "DONE"
 
 
 echo "renaming repository to convetions..."
-mv "Patnic-IDE" "Installer"
+mv "Patnic-IDE" "IDE"
 mv "Patnic-Docs" "Docs"
 mv "Patnic-CLI" "CLI"
 mv "Patnic-Src" "Src"
